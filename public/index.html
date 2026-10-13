@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Las cuentas de las pensiones</title>
+  <meta name="description" content="Infografías interactivas con datos oficiales sobre el gasto en pensiones en España, su sostenibilidad y lo que supone para los jóvenes. Explora los Presupuestos y juega a cuadrar las cuentas.">
+  <meta property="og:title" content="Las cuentas de las pensiones">
+  <meta property="og:description" content="¿Cuánto cuestan las pensiones? ¿Bastaría con cerrar «chiringuitos»? Datos oficiales, gráficos interactivos y un simulador para comprobarlo tú mismo.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://presupuestos.nephei.org/">
+  <meta name="theme-color" content="#14130f">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="brand" href="#inicio">Las cuentas de las pensiones</a>
+      <nav class="nav" aria-label="Secciones">
+        <a href="#presupuesto">Presupuesto</a>
+        <a href="#reloj">Reloj</a>
+        <a href="#simulador">Simulador</a>
+        <a href="#jovenes">Jóvenes</a>
+        <a href="#fuentes">Fuentes</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar entre tema claro y oscuro">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio">
+      <div class="wrap">
+        <p class="kicker">Datos oficiales · actualizado el <span data-bind="actualizado"></span></p>
+        <h1>Mientras lees esto, España paga <span class="accent" id="tickerHero">0 €</span> en pensiones.</h1>
+        <p class="lead">Cada mes la Seguridad Social abona <strong data-bind="nominaMensual"></strong> en pensiones contributivas. Es la mayor partida del Estado, crece más deprisa que casi cualquier otra y la pagan, sobre todo, quienes hoy trabajan. Aquí tienes las cuentas, con fuentes, para que saques tus propias conclusiones.</p>
+
+        <div class="tiles">
+          <div class="tile">
+            <div class="tile-num" data-bind="pensionesN"></div>
+            <div class="tile-lab">pensiones contributivas en septiembre de 2026 <button class="src" data-src="segsoc-nomina">fuente</button></div>
+          </div>
+          <div class="tile">
+            <div class="tile-num" data-bind="afiliadosPorPension"></div>
+            <div class="tile-lab">afiliados por cada pensión. Hace falta más de dos trabajadores para sostener cada una <button class="src" data-src="afiliacion">fuente</button></div>
+          </div>
+          <div class="tile">
+            <div class="tile-num" data-bind="recaudacion2025"></div>
+            <div class="tile-lab">recaudó Hacienda en 2025: récord histórico, +10,4 % <button class="src" data-src="aeat-2025">fuente</button></div>
+          </div>
+          <div class="tile">
+            <div class="tile-num" data-bind="deudaTotal"></div>
+            <div class="tile-lab">de deuda pública (<span data-bind="deudaPct"></span> del PIB). Unos <span data-bind="deudaPorHab"></span> por habitante <button class="src" data-src="bde-deuda">fuente</button></div>
+          </div>
+        </div>
+        <a class="cta" href="#presupuesto">Empieza a explorar ↓</a>
+      </div>
+    </section>
+
+    <!-- ============ 1. RECAUDACIÓN ============ -->
+    <section class="sec" id="recaudacion">
+      <div class="wrap">
+        <p class="sec-num">01</p>
+        <h2>Se recauda más que nunca… y aun así no llega</h2>
+        <p class="sec-lead">Hacienda bate récords de ingresos año tras año: <strong>+53 %</strong> entre 2019 y 2025. Aun así, las administraciones cerraron 2025 con <strong data-bind="deficit"></strong> de déficit y pagaron <strong data-bind="intereses"></strong> solo en intereses de la deuda. Es decir: <em>todo el déficit se va en pagar intereses</em> de lo que ya debemos.</p>
+        <div class="grid-2">
+          <figure class="card">
+            <figcaption>
+              <h3>Ingresos tributarios gestionados por la Agencia Tributaria</h3>
+              <p class="sub">Miles de millones de euros por año</p>
+            </figcaption>
+            <div class="chart" id="chartRecaudacion" role="img" aria-label="Gráfico de barras de la recaudación tributaria 2019-2025"></div>
+            <p class="foot">Fuente: Agencia Tributaria, informes anuales de recaudación. <button class="src" data-src="aeat-2025">ver</button></p>
+          </figure>
+          <div class="facts">
+            <div class="fact">
+              <span class="fact-num" data-bind="ingresosAAPP"></span>
+              <span class="fact-lab">ingresaron en total todas las administraciones en 2025 (<span data-bind="ingresosPct"></span> del PIB) <button class="src" data-src="igae-4t2025">fuente</button></span>
+            </div>
+            <div class="fact">
+              <span class="fact-num" data-bind="transfSS"></span>
+              <span class="fact-lab">transfirió el Estado (es decir, tus impuestos) a la Seguridad Social en 2025 porque las cotizaciones no bastan <button class="src" data-src="igae-4t2025">fuente</button></span>
+            </div>
+            <div class="fact">
+              <span class="fact-num" data-bind="prestamosSS"></span>
+              <span class="fact-lab">debía la Seguridad Social al Estado por préstamos acumulados a final de 2023 (Tribunal de Cuentas) <button class="src" data-src="tcu-ss">fuente</button></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. EXPLORADOR ============ -->
+    <section class="sec alt" id="presupuesto">
+      <div class="wrap">
+        <p class="sec-num">02</p>
+        <h2>¿A dónde va el dinero? Explora el presupuesto</h2>
+        <p class="sec-lead">Cada rectángulo es proporcional a lo que se gasta. Pulsa un bloque para entrar y ver sus partidas. Puedes elegir entre el <strong>Presupuesto del Estado</strong> (los PGE de 2023, que siguen prorrogados en 2026) y el <strong>gasto de todas las administraciones</strong> (Estado, comunidades y ayuntamientos), que es la comparación justa para sanidad y educación porque las gestionan las comunidades.</p>
+
+        <div class="controls" role="group" aria-label="Elegir presupuesto">
+          <button class="seg on" data-dataset="pge2023" type="button">Presupuesto del Estado 2023 (vigente)</button>
+          <button class="seg" data-dataset="cofog2024" type="button">Todas las administraciones 2024</button>
+        </div>
+
+        <figure class="card">
+          <figcaption class="explorer-head">
+            <nav class="crumbs" id="crumbs" aria-label="Ruta"></nav>
+            <p class="sub" id="explorerTotal"></p>
+          </figcaption>
+          <div class="treemap" id="treemap"></div>
+          <div class="legend" id="treemapLegend"></div>
+          <details class="table-view">
+            <summary>Ver como tabla</summary>
+            <div id="treemapTable"></div>
+          </details>
+          <p class="foot" id="explorerFoot"></p>
+        </figure>
+
+        <div class="callout">
+          <p><strong>Para que te hagas una idea:</strong> en el Presupuesto del Estado, las pensiones (<span data-bind="pgePensiones"></span>) pesan más que defensa, justicia, seguridad, sanidad, educación, cultura, I+D, infraestructuras e intereses de la deuda <em>juntos</em>. En el conjunto de las administraciones, pensiones (vejez + supervivencia) suman <span data-bind="cofogPensiones"></span>: más que sanidad, educación y defensa de toda España sumadas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. RELOJ ============ -->
+    <section class="sec" id="reloj">
+      <div class="wrap">
+        <p class="sec-num">03</p>
+        <h2>El reloj de las pensiones</h2>
+        <p class="sec-lead">Se suele decir que si se cerraran los «chiringuitos» habría dinero de sobra para pensiones. Vamos a comprobarlo: ¿cuánto tiempo de pensiones se podría pagar con el presupuesto entero de cada una de estas partidas?</p>
+
+        <div class="clock-hero card">
+          <label for="clockSelect" class="sr-only">Elige una partida</label>
+          <select id="clockSelect" class="select"></select>
+          <p class="clock-statement" id="clockStatement" aria-live="polite"></p>
+        </div>
+
+        <figure class="card">
+          <figcaption>
+            <h3>Tiempo de pensiones contributivas que paga cada partida</h3>
+            <p class="sub">Escala logarítmica: cada marca multiplica por 10. Pasa el ratón o toca una barra para ver el detalle.</p>
+          </figcaption>
+          <div class="chart" id="chartClock"></div>
+          <p class="foot">Cálculo: importe anual de la partida ÷ gasto anual en pensiones contributivas (nómina de septiembre de 2026 × 14 pagas ≈ <span data-bind="gastoAnual"></span>). <button class="src" data-src="segsoc-nomina">fuentes</button></p>
+        </figure>
+
+        <div class="callout warn">
+          <p><strong>Conclusión:</strong> eliminar <em>por completo</em> la Casa Real, el Ministerio de Igualdad, el de Consumo, las subvenciones a partidos, RTVE, todas las televisiones autonómicas y las Cortes pagaría las pensiones durante <strong id="clockSumSmall"></strong>. Y además hay <span data-bind="entes"></span> entes que dependen de las comunidades autónomas (más de la mitad, fundaciones y sociedades) <button class="src" data-src="hacienda-ispa">fuente</button>: hay margen para ahorrar, pero no hay chiringuito que tape un agujero de este tamaño.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. SIMULADOR ============ -->
+    <section class="sec alt" id="simulador">
+      <div class="wrap">
+        <p class="sec-num">04</p>
+        <h2>Juega a cuadrar las cuentas</h2>
+        <p class="sec-lead">Tú decides qué recortar. Mueve los controles y mira si llegas a cubrir dos objetivos: <strong>dejar de transferir impuestos a la Seguridad Social</strong> y <strong>pagar la subida del gasto en pensiones que prevé la Comisión Europea hasta 2045</strong>.</p>
+
+        <div class="sim">
+          <div class="sim-controls card" id="simControls">
+            <h3>Recortes en otras partidas</h3>
+            <div id="simSliders"></div>
+            <h3 class="mt">Ajustes en las pensiones</h3>
+            <div class="sim-row">
+              <label for="revalGap">Revalorizar por debajo del IPC <output id="revalGapOut"></output></label>
+              <input type="range" id="revalGap" min="0" max="2" step="0.25" value="0">
+            </div>
+            <div class="sim-row">
+              <label for="revalYears">Durante <output id="revalYearsOut"></output></label>
+              <input type="range" id="revalYears" min="1" max="10" step="1" value="5">
+            </div>
+            <p class="hint">Ejemplo: con un 1 punto menos que el IPC durante 5 años, la pensión pierde alrededor de un 5 % de poder adquisitivo. Es la palanca más potente, y por eso la más polémica: la sufren quienes ya están jubilados.</p>
+            <button class="reset" id="simReset" type="button">Restablecer</button>
+          </div>
+
+          <div class="sim-result">
+            <div class="card sticky">
+              <p class="sim-total-lab">Ahorro anual que consigues</p>
+              <p class="sim-total" id="simTotal" aria-live="polite">0 M€</p>
+              <div class="goal">
+                <div class="goal-head"><span>Objetivo 1 · Transferencias del Estado a la Seguridad Social (2025)</span><span id="goal1Pct"></span></div>
+                <div class="bar"><div class="bar-fill" id="goal1Bar"></div></div>
+                <p class="goal-sub"><span data-bind="transfSS"></span> <button class="src" data-src="igae-4t2025">fuente</button></p>
+              </div>
+              <div class="goal">
+                <div class="goal-head"><span>Objetivo 2 · Aumento del gasto en pensiones previsto hasta 2045 (+3,8 puntos del PIB)</span><span id="goal2Pct"></span></div>
+                <div class="bar"><div class="bar-fill" id="goal2Bar"></div></div>
+                <p class="goal-sub">≈ <span data-bind="goal2"></span> al año con el PIB de 2025 <button class="src" data-src="ageing-2024">fuente</button></p>
+              </div>
+              <p class="sim-verdict" id="simVerdict"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. REVALORIZACIÓN ============ -->
+    <section class="sec" id="revalorizacion">
+      <div class="wrap">
+        <p class="sec-num">05</p>
+        <h2>Revalorizar con el IPC: lo que cuesta cada punto</h2>
+        <p class="sec-lead">Desde la Ley 21/2021, las pensiones suben cada año con el IPC medio. Protege a los jubilados de la inflación, pero tiene un precio: cada subida se consolida y se paga <strong>todos los años siguientes</strong>. Entre 2022 y 2026 las pensiones han subido un <strong id="revalAcum"></strong> acumulado.</p>
+        <div class="grid-2">
+          <figure class="card">
+            <figcaption>
+              <h3>Revalorización general de las pensiones contributivas</h3>
+              <p class="sub">% de subida cada 1 de enero</p>
+            </figcaption>
+            <div class="chart" id="chartReval"></div>
+            <p class="foot">Fuentes: PGE 2023, IGAE, Seguridad Social. <button class="src" data-src="igae-4t2025">ver</button></p>
+          </figure>
+          <div class="facts">
+            <div class="fact">
+              <span class="fact-num" id="costePunto"></span>
+              <span class="fact-lab">cuesta <strong>cada punto</strong> de revalorización, cada año y para siempre (1 % del gasto anual en pensiones contributivas). Cálculo propio sobre la nómina de septiembre de 2026.</span>
+            </div>
+            <div class="fact">
+              <span class="fact-num" id="coste2023"></span>
+              <span class="fact-lab">cuesta al año, todavía hoy, la subida del 8,5 % de 2023. Es más que todo el presupuesto de Defensa de 2023 (12.317 M€). <button class="src" data-src="pge2023">fuente</button></span>
+            </div>
+            <div class="fact">
+              <span class="fact-num" id="costeAcum"></span>
+              <span class="fact-lab">al año es lo que suman hoy todas las revalorizaciones de 2022 a 2026. Es lo que se gastaría de menos si las pensiones se hubieran congelado en euros de 2021, algo que habría costado a los jubilados casi una quinta parte de su poder de compra.</span>
+            </div>
+          </div>
+        </div>
+        <div class="callout">
+          <p><strong>Para ser justos:</strong> entre 2021 y 2024 el salario medio de los jóvenes de 25 a 29 años subió un <span id="salJovenCrec"></span> (INE), algo más que las pensiones en ese periodo (+15,4 %). El problema no es solo la inflación, sino que las nuevas pensiones son cada vez más altas, cada vez hay más pensionistas y viven más años. Y que el sistema ya no se paga con cotizaciones.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. EVOLUCIÓN + DEMOGRAFÍA ============ -->
+    <section class="sec alt" id="demografia">
+      <div class="wrap">
+        <p class="sec-num">06</p>
+        <h2>La tendencia: cada vez más pensiones, cada vez menos trabajadores por pensión</h2>
+        <figure class="card">
+          <figcaption>
+            <h3>Gasto de todas las administraciones por funciones, 2000-2024</h3>
+            <p class="sub">Miles de millones de euros. Pensiones = vejez + supervivencia</p>
+          </figcaption>
+          <div class="chart tall" id="chartEvol"></div>
+          <p class="foot">Fuente: Eurostat, COFOG (gov_10a_exp). <button class="src" data-src="eurostat-cofog">ver</button></p>
+        </figure>
+
+        <div class="grid-2 mt">
+          <figure class="card">
+            <figcaption>
+              <h3>Personas en edad de trabajar por cada persona de 67 años o más</h3>
+              <p class="sub">Población de 16 a 66 años ÷ población de 67 o más. Proyección del INE</p>
+            </figcaption>
+            <div class="chart" id="chartDemo"></div>
+            <p class="foot">Fuente: INE, Proyecciones de Población 2026-2076 (tabla 36643). Cálculo propio. <button class="src" data-src="ine-proyecciones">ver</button></p>
+          </figure>
+          <figure class="card">
+            <figcaption>
+              <h3>Gasto en pensiones previsto, % del PIB</h3>
+              <p class="sub">Comisión Europea, Ageing Report 2024</p>
+            </figcaption>
+            <div class="chart" id="chartAgeing"></div>
+            <p class="foot">España tendrá la mayor subida de la UE hasta 2045 (+3,8 puntos). El sistema pasará de un déficit del 0,2 % del PIB a uno del 2,5 %. <button class="src" data-src="ageing-2024">ver</button></p>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. JÓVENES ============ -->
+    <section class="sec" id="jovenes">
+      <div class="wrap">
+        <p class="sec-num">07</p>
+        <h2>¿Y los jóvenes?</h2>
+        <p class="sec-lead">Hoy un trabajador de 25 a 29 años cobra de media <strong>casi lo mismo que una pensión media de jubilación</strong>, y los menores de 25 bastante menos. Encima, cotiza más que las generaciones anteriores (el «Mecanismo de Equidad Intergeneracional» añade un 0,9 % en 2026 y seguirá subiendo) y heredará una deuda que roza el 100 % del PIB.</p>
+
+        <figure class="card">
+          <figcaption>
+            <h3>Salario medio bruto anual por edad (2024) frente a la pensión media de jubilación</h3>
+            <p class="sub">Euros al año. Pensión = 1.576,1 € × 14 pagas (septiembre de 2026)</p>
+          </figcaption>
+          <div class="chart" id="chartSalarios"></div>
+          <p class="foot">Fuentes: INE, Encuesta Anual de Estructura Salarial 2024; Seguridad Social. Ojo: el salario es de 2024 y la pensión de 2026. <button class="src" data-src="ine-salarios">ver</button></p>
+        </figure>
+
+        <div class="tiles mt">
+          <div class="tile">
+            <div class="tile-num"><span data-bind="paroEs"></span></div>
+            <div class="tile-lab">paro de los menores de 25 años en España, frente al <span data-bind="paroUe"></span> en la UE (2025) <button class="src" data-src="eurostat-paro">fuente</button></div>
+          </div>
+          <div class="tile">
+            <div class="tile-num"><span data-bind="emanEs"></span></div>
+            <div class="tile-lab">años: edad media a la que se independizan los jóvenes españoles; en la UE, <span data-bind="emanUe"></span> <button class="src" data-src="eurostat-emancipacion">fuente</button></div>
+          </div>
+          <div class="tile">
+            <div class="tile-num">≥85 %</div>
+            <div class="tile-lab">de su salario neto cobra de pensión un trabajador con sueldo medio y carrera completa en España (tasa de sustitución, OCDE). La media de la OCDE es del 63 % <button class="src" data-src="ocde-pag2025">fuente</button></div>
+          </div>
+          <div class="tile">
+            <div class="tile-num">123 %</div>
+            <div class="tile-lab">del PIB: deuda pública prevista en 2050 si no se cambia nada, según la AIReF <button class="src" data-src="airef-2026">fuente</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8. EUROPA ============ -->
+    <section class="sec alt" id="europa">
+      <div class="wrap">
+        <p class="sec-num">08</p>
+        <h2>España frente a Europa</h2>
+        <p class="sec-lead">España ya gasta en pensiones más que la media de la UE. Y, según la Comisión Europea, en 2045 será uno de los países que más gaste.</p>
+        <figure class="card">
+          <figcaption>
+            <h3>Gasto público en pensiones (vejez + supervivencia), % del PIB, 2024</h3>
+          </figcaption>
+          <div class="chart" id="chartUE"></div>
+          <p class="foot">Fuente: Eurostat, COFOG (gov_10a_exp). <button class="src" data-src="eurostat-cofog">ver</button></p>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ 9. MATICES ============ -->
+    <section class="sec" id="matices">
+      <div class="wrap narrow">
+        <p class="sec-num">09</p>
+        <h2>Lo que esta web no dice (y conviene saber)</h2>
+        <ul class="caveats">
+          <li><strong>Los jubilados cotizaron.</strong> Las pensiones contributivas son un derecho generado con años de cotizaciones; el debate es cómo repartir el ajuste entre generaciones, no si los pensionistas «merecen» su pensión.</li>
+          <li><strong>Muchas pensiones son bajas.</strong> La media esconde mucha diferencia: la de autónomos ronda los 1.063 € al mes y el Estado paga más de 7.000 M€ al año en complementos a mínimos. Cualquier ajuste serio debe proteger a los que menos cobran.</li>
+          <li><strong>El Presupuesto del Estado no es todo el gasto público.</strong> Sanidad y educación las pagan sobre todo las comunidades. Por eso ofrecemos también el gasto de todas las administraciones.</li>
+          <li><strong>Los PGE de 2023 están anticuados.</strong> España no aprueba presupuestos desde 2023. El gasto real de 2026 en pensiones es bastante mayor que el presupuestado entonces. Usamos datos de ejecución (IGAE, Seguridad Social) siempre que existen.</li>
+          <li><strong>Las cotizaciones también suben.</strong> La reforma de 2023 aumenta los ingresos (MEI, cuota de solidaridad, bases máximas). Según la AIReF, cumple su propia regla de gasto, pero eso no garantiza la sostenibilidad: hará falta más dinero del Estado hasta 2050.</li>
+          <li><strong>Hay cálculos propios.</strong> Están señalados como tales, con el método al lado. Todo el código y los datos son públicos y se pueden revisar.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ FUENTES ============ -->
+    <section class="sec alt" id="fuentes">
+      <div class="wrap narrow">
+        <h2>Fuentes</h2>
+        <p class="sec-lead">Todas las cifras proceden de organismos oficiales (Hacienda, IGAE, Agencia Tributaria, Seguridad Social, INE, Banco de España, Eurostat, Comisión Europea, OCDE). Cuando el dato llega a través de prensa, se indica. Si encuentras un error, <a href="https://github.com/aifaro/calculadora-estatal-presupuestos/issues">abre una incidencia en GitHub</a>.</p>
+        <ol class="sources" id="sourcesList"></ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>Proyecto abierto · <a href="https://github.com/aifaro/calculadora-estatal-presupuestos">Código y datos en GitHub</a> · Cifras en euros corrientes. M€ = millones de euros.</p>
+    </div>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <dialog class="src-dialog" id="srcDialog">
+    <form method="dialog">
+      <h3 id="srcTitle"></h3>
+      <p id="srcDetail"></p>
+      <p><a id="srcLink" href="#" target="_blank" rel="noopener">Abrir la fuente original ↗</a></p>
+      <button type="submit" class="reset">Cerrar</button>
+    </form>
+  </dialog>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
