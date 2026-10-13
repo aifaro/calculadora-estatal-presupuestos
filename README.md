@@ -68,7 +68,7 @@ La lista completa, con el detalle de cada cifra, está en `public/js/data.js` y 
 
 El repositorio es un sitio estático, así que el Worker no necesita código propio. Basta con `wrangler.jsonc`, que publica la carpeta `public/`.
 
-- **Si el proyecto es un Worker conectado a Git (Workers Builds):** el comando de despliegue por defecto (`npx wrangler deploy`) lee `wrangler.jsonc`. El campo `name` tiene que coincidir con el nombre del Worker en el panel de Cloudflare; si no se llama `calculadora-estatal-presupuestos`, cámbialo.
+- **Si el proyecto es un Worker conectado a Git (Workers Builds):** el comando de despliegue por defecto (`npx wrangler deploy`) lee `wrangler.jsonc`. El campo `name` tiene que coincidir con el nombre del Worker en el panel de Cloudflare; aquí es `calculadora-presupuestos`.
 - **Si es un proyecto de Pages:** en *Settings → Build*, deja vacío el comando de build y pon `public` como directorio de salida.
 
 **Dominio `presupuestos.nephei.org`:** si `nephei.org` está gestionado en la misma cuenta de Cloudflare, ve a *Workers & Pages → (el proyecto) → Settings → Domains & Routes → Add → Custom domain* y escribe `presupuestos.nephei.org`. Cloudflare crea el registro DNS y el certificado. También se puede declarar en `wrangler.jsonc`:

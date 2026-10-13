@@ -2,7 +2,7 @@
 // El "name" debe coincidir con el nombre del Worker conectado al repositorio en el panel de Cloudflare.
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "calculadora-estatal-presupuestos",
+  "name": "calculadora-presupuestos",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./public",
