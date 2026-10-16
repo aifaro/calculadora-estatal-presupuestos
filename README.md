@@ -2,7 +2,7 @@
 
 Web divulgativa e interactiva sobre el gasto en pensiones en España, su sostenibilidad y lo que supone para los jóvenes. Todo con datos oficiales y enlazados a su fuente.
 
-**En línea:** https://presupuestos.nephei.org (cuando el dominio esté conectado)
+**En línea:** https://pensiones.nephei.org (cuando el dominio esté conectado)
 
 ## Qué incluye
 
